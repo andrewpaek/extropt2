@@ -1,0 +1,7 @@
+# AMPL run file for Task 2
+ampl
+model eo2_task2.1.mod;
+data eo2_task2.1.dat;
+option solver cplex;
+solve;
+print {i in DONORS}: {j in RECIPIENTS} X[i,j] > eo2_2.1.small.out;
