@@ -2,3 +2,7 @@
 param num_people = 10;
 
 read {(i,j) in PAIRS} compat_pairs[i,j] <10_raw.txt;
+
+
+#param num_people = 50;
+#read {(i,j) in PAIRS} compat_pairs[i,j] <50_raw.txt;
