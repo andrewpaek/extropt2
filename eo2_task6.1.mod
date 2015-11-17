@@ -14,7 +14,9 @@ maximize Pairwise_Swaps: sum{(i,j) in PAIRS} compat_pairs[i,j]*X[i,j]; # maximiz
 
 subject to Donate_Receive {i in DONORS}: sum{j in RECIPIENTS} X[i,j]*compat_pairs[i,j] = sum{j in DONORS} X[j,i]*compat_pairs[j,i]; # ensures that each donor also receives a kidney
 
+#subject to Yo {i in DONORS}: sum{j in RECIPIENTS} X[i,j]*compat_pairs[i,j] <= 1;
+
 subject to Kidney_Donate {i in DONORS}: sum{j in RECIPIENTS} X[i,j]*compat_pairs[i,j] <= 1; # ensures that each donor only donates one kidney
 subject to Kidney_Recieve {j in RECIPIENTS}: sum{i in DONORS} X[i,j]*compat_pairs[i,j] <= 1; # ensures that each recipient only receives one kidney
 
-subject to Cycle_Constraint {(i,j,k,l) in PAIRS}: compat_pairs[i,j]*X[i,j] + compat_pairs[j,k]*X[j,k] + compat_pairs[k,l]*X[k,l] <= 2; # ensures no cycles greater than 2
+subject to Cycle_Constraint {(i,j) in PAIRS, (k,l) in PAIRS}: compat_pairs[i,j]*X[i,j] + compat_pairs[j,k]*X[j,k] + compat_pairs[k,l]*X[k,l] <= 2; # ensures no cycles greater than 2
