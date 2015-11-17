@@ -13,10 +13,11 @@ var Y{2D} >=0, binary;
 var ind3 >=0, binary;
 
 # remember objective value will count (2,1) and (1,2) as separate
-maximize OBJ: (sum{(i,j,k) in 3D} X[i,j,k]*compat_pairs[i,j]*compat_pairs[j,k]*compat_pairs[k,i]) + (sum{(i,j) in 2D} Y[i,j]*compat_pairs[i,j]*compat_pairs[j,i])
+maximize OBJ: (sum{(i,j,k) in 3D} X[i,j,k]) + (sum{(i,j) in 2D} Y[i,j])
 
 #subject to ind3def {(i,j,k) in 3D}: compat_pairs[i,j]*compat_pairs[j,k]*compat_pairs[k,i] 
 
-Subject to first {i in PAIRS}: sum{j in PAIRS} sum {k in PAIRS} X[i,j,k] + Y[i,j] + Y[j,k] + Y[k,i] <= 1;
-Subject to first {j in PAIRS}: sum{i in PAIRS} sum {k in PAIRS} X[i,j,k] + Y[i,j] + Y[j,k] + Y[k,i] <= 1;
-Subject to first {k in PAIRS}: sum{i in PAIRS} sum {j in PAIRS} X[i,j,k] + Y[i,j] + Y[j,k] + Y[j,k] <= 1;
+Subject to first {i in PAIRS}: sum{(i,j,k) in 3D} X[i,j,k] + Y[i,j] + Y[j,k] + Y[k,i] <= 1;
+Subject to first {j in PAIRS}: sum{(i,j,k) in 3D} X[i,j,k] + Y[i,j] + Y[j,k] + Y[k,i] <= 1;
+Subject to first {k in PAIRS}: sum{(i,j,k) in 3D} X[i,j,k] + Y[i,j] + Y[j,k] + Y[j,k] <= 1;
+Subject to first {(i,j,k) in 3D}: 3*X[i,j,k] <= compat_pairs[i,j]+compat_pairs[j,k]+compat_pairs[k,i] 

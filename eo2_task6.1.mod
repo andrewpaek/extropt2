@@ -25,3 +25,4 @@ subject to compatibiliy {i in DONORS, j in RECIPIENTS}: X[i,j] <= compat_pairs[i
 
 subject to Cycle_Constraint {i in DONORS, j in DONORS, k in DONORS, l in DONORS:  i<>l<>j<>k}: X[i,j] +X[j,k] +X[k,l] <= 2;
 
+
