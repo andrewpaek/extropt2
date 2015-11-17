@@ -21,8 +21,8 @@ subject to Kidney_Donate {i in DONORS}: sum{j in RECIPIENTS} X[i,j] <= 1;
 # ensures that each recipient only receives one kidney
 subject to Kidney_Recieve {j in RECIPIENTS}: sum{i in DONORS} X[i,j] <= 1;
 
+subject to compatibiliy {i in DONORS, j in RECIPIENTS}: X[i,j] <= compat_pairs[i,j];
+
 # ensures no cycles greater than 2
 
 subject to Cycle_Constraint {i in DONORS, j in DONORS, k in DONORS, l in DONORS: l<>i}: X[i,j] + X[j,k] + X[k,l] <= 2;
-
-subject to compatibiliy {i in DONORS, j in RECIPIENTS}: X[i,j] <= compat_pairs[i,j];
