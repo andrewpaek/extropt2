@@ -22,4 +22,6 @@ subject to Kidney_Donate {i in DONORS}: sum{j in RECIPIENTS} X[i,j]*compat_pairs
 subject to Kidney_Recieve {j in RECIPIENTS}: sum{i in DONORS} X[i,j]*compat_pairs[i,j] <= 1;
 
 # ensures no cycles greater than 2
-subject to Cycle_Constraint {(i,j) in PAIRS, (j,k) in PAIRS, (k,l) in PAIRS}: compat_pairs[i,j]*X[i,j] + compat_pairs[j,k]*X[j,k] + compat_pairs[k,l]*X[k,l] <= 2;
+
+subject to Cycle_Constraint {i in DONORS, j in DONORS, k in DONORS, l in DONORS: l<>i}: compat_pairs[i,j]*X[i,j] + compat_pairs[j,k]*X[j,k] + compat_pairs[k,l]*X[k,l] <= 2;
+
