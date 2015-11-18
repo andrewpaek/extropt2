@@ -1,4 +1,6 @@
 # AMPL Data for Task 2
 param num_people = 50;
 
+#read {(i,j) in PAIRS} compat_pairs[i,j] < 50_raw.txt;
+
 read {(i,j) in 2D} compat_pairs[i,j] < 50_raw.txt;

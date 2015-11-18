@@ -10,14 +10,23 @@ param compat_pairs {(i,j) in 2D};
 
 var X{3D} >=0, binary;
 var Y{2D} >=0, binary;
+var vis{2D} >=0, binary;
+var twodef >=0, integer;
+var threedef >=0, integer;
+var test{PAIRS} >=0, integer;
 
 
 # remember objective value will count (2,1) and (1,2) as separate
-maximize OBJ: (sum{(i,j,k) in 3D:i<j and i<k} X[i,j,k]) + (sum{(i,j) in 2D} Y[i,j]);
+maximize OBJ: 3*(sum{(i,j,k) in 3D:i<j and i<k} X[i,j,k]) + (sum{(i,j) in 2D} Y[i,j]);
 
-subject to first {i in PAIRS}: sum{(j,k) in 2D: i<>j<>k} X[i,j,k] <=1;
-subject to second {j in PAIRS}: sum{(i,k) in 2D:i<>j<>k} X[i,j,k] <=1;
-subject to third {k in PAIRS}: sum{(i,j) in 2D:i<>j<>k} X[i,j,k] <=1;
+subject to testd{k in PAIRS}: sum{(i,j) in 2D} X[i,j,k] = test[k]; 
+#subject to testd2{(i,j) in 2D}: 
+subject to twod: sum{(i,j) in 2D} Y[i,j] = twodef;
+subject to threed: sum{(i,j,k) in 3D} X[i,j,k] = threedef;
+
+subject to first {a in PAIRS}: (sum{(j,k) in 2D} X[a,j,k])+(sum{(i,k) in 2D} X[i,a,k]) + (sum{(i,j) in 2D} X[i,j,a]) <=1;
+#subject to second {j in PAIRS}: sum{(i,k) in 2D:i<>j<>k} X[i,j,k] <=1;
+#subject to third {k in PAIRS}: sum{(i,j) in 2D:i<>j<>k} X[i,j,k] <=1;
 subject to fix{i in PAIRS}: sum{j in PAIRS} Y[i,j] <=1;
 subject to lala{j in PAIRS}: sum{i in PAIRS} Y[i,j] <=1;
 
