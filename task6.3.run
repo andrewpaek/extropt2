@@ -1,4 +1,4 @@
 option solver cplex;
-model try.mod;
+model eo2_task6.3.mod;
 data eo2_task2.1.dat;
 solve;
