@@ -1,4 +1,4 @@
 # AMPL Data for Task 2
-param num_people = 50;
+param num_people = 100;
 
-read {(i,j) in 2D} compat_pairs[i,j] < 50_raw.txt;
+read {(i,j) in 2D} compat_pairs[i,j] < 100_raw.txt;
