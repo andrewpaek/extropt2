@@ -20,7 +20,6 @@ var test{PAIRS} >=0, integer;
 maximize OBJ: 3*(sum{(i,j,k) in 3D:i<j and i<k} X[i,j,k]) + (sum{(i,j) in 2D} Y[i,j]);
 
 subject to testd{k in PAIRS}: sum{(i,j) in 2D} X[i,j,k] = test[k]; 
-#subject to testd2{(i,j) in 2D}: 
 subject to twod: sum{(i,j) in 2D} Y[i,j] = twodef;
 subject to threed: sum{(i,j,k) in 3D} X[i,j,k] = threedef;
 
